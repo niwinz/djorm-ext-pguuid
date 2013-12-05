@@ -5,8 +5,13 @@ import uuid
 from psycopg2.extensions import register_adapter
 
 from django.db.models import Field, SubfieldBase
-from django.utils.encoding import force_bytes
 from django.utils import six
+
+try:
+    from django.utils.encoding import force_bytes
+except ImportError:
+    # django < 1.5
+    from django.utils.encoding import smart_str as force_bytes
 
 
 class UUIDAdapter(object):
