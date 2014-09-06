@@ -48,6 +48,11 @@ class UUIDField(six.with_metaclass(SubfieldBase, Field)):
     def db_type(self, connection):
         return 'uuid'
 
+    def deconstruct(self):
+        name, path, args, kwargs = super(UUIDField, self).deconstruct()
+        kwargs["auto_add"] = self._auto_add
+        return name, path, args, kwargs
+
     def get_prep_value(self, value):
         if not value:
             if self.null or self._auto_add:
