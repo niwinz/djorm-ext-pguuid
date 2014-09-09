@@ -5,8 +5,13 @@ import uuid
 from psycopg2.extensions import register_adapter
 
 from django.db.models import Field, SubfieldBase
-from django.utils.encoding import force_bytes
 from django.utils import six
+
+try:
+    from django.utils.encoding import force_bytes
+except ImportError:
+    # django < 1.5
+    from django.utils.encoding import smart_str as force_bytes
 
 
 class UUIDAdapter(object):
@@ -42,6 +47,11 @@ class UUIDField(six.with_metaclass(SubfieldBase, Field)):
 
     def db_type(self, connection):
         return 'uuid'
+
+    def deconstruct(self):
+        name, path, args, kwargs = super(UUIDField, self).deconstruct()
+        kwargs["auto_add"] = self._auto_add
+        return name, path, args, kwargs
 
     def get_prep_value(self, value):
         if not value:
