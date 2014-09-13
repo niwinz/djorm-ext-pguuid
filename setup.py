@@ -6,7 +6,7 @@ PostgreSQL native uuid field support for Django.
 
 setup(
     name = "djorm-ext-pguuid",
-    version = '0.1',
+    version = '0.2',
     url = 'https://github.com/niwibe/djorm-ext-pguuid',
     license = 'BSD',
     platforms = ['OS Independent'],
