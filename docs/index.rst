@@ -52,7 +52,7 @@ This is a sample definition of model using a UUIDField:
 Creating objects
 ~~~~~~~~~~~~~~~~
 
-This is a sample example of creating objects with array fields.
+This is a sample example of creating objects with uuid fields.
 
 .. code-block:: pycon
 
